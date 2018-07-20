@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+  "name": "Drag to Save",
+  "version": "1.0",
+  "description": "Offline Read Later list manager, for links!",
+
+  "applications": {
+    "gecko": {
+      "id": "{d67f56e8-7277-45cb-9f12-e48e595c24c0}"
+    }
+  },
+
+  "icons": {
+    "96": "icons/drag-to-save-96.png",
+    "48": "icons/drag-to-save-48.png"
+  },
+
+  "permissions": ["activeTab", "tabs", "clipboardWrite", "storage"],
+
+  "browser_action": {
+    "default_icon": "icons/drag-to-save-32.png",
+    "default_title": "Drag to Save",
+    "default_popup": "popup/dts-popup.html"
+  },
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "css": ["content_scripts/drag-to-save.css"],
+      "js": ["vendor/jquery.min.js", "content_scripts/drag-to-save.js"]
+    }
+  ]
+}

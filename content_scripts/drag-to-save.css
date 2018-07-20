@@ -1,0 +1,9 @@
+.lc-hidden {
+  opacity: 0;
+}
+
+.lc-added {
+  position: fixed;
+  transition: transform 100ms;
+  color: #06ad00;
+}

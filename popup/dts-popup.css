@@ -1,0 +1,115 @@
+html,
+body {
+  width: 400px;
+  margin: 0;
+  padding: 0;
+}
+
+.lc-tick {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgba(0, 102, 134, 0.6);
+  z-index: 9990;
+  cursor: pointer;
+}
+
+.lc-container {
+  width: 400px;
+  height: 400px;
+  right: 0;
+  z-index: 9999;
+  font-family: -apple-system, sans-serif;
+  font-size: 14px;
+  color: black;
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 200ms;
+}
+
+.lc-hidden {
+  opacity: 0;
+}
+
+.lc-container .lc-pin {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.lc-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  flex: stretch;
+  overflow: auto;
+}
+
+.lc-list .lc-item {
+  border-bottom: 1px solid #ededed;
+}
+
+.lc-list .lc-item .lc-link:link {
+  display: flex;
+  text-decoration: none;
+  color: black;
+  font-weight: 300;
+}
+
+.lc-link .lc-title {
+  padding: 14px 10px;
+  flex: 3;
+}
+
+.lc-list .lc-item .lc-link:hover {
+  background-color: #efefef;
+}
+
+.lc-link .lc-checked {
+  padding: 14px 20px;
+}
+
+.lc-link .lc-checked:hover {
+  background-color: #ffd8d8;
+}
+
+.lc-actions {
+  display: flex;
+}
+
+.lc-btn-basic {
+  border: none;
+  color: white;
+  padding: 15px 0;
+  font-size: 16px;
+  font-family: sans-serif;
+  font-weight: 300;
+  cursor: pointer;
+  flex: 1;
+}
+
+.lc-clipboard {
+  background-color: #0078f5;
+}
+
+.lc-clipboard-input {
+  position: absolute;
+  top: -300px;
+}
+
+.lc-clipboard:active {
+  background-color: #005fc3;
+}
+
+.lc-clear {
+  background-color: #ff1212;
+}
+
+.lc-clear:active {
+  background-color: #9f0b0b;
+}

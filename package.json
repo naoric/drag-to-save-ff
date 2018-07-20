@@ -1,0 +1,19 @@
+{
+  "name": "@astralink/drag-to-save",
+  "version": "1.0.0",
+  "description": "",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc popup/dts-popup.tsx"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lit-html": "^0.10.2"
+  },
+  "devDependencies": {
+    "typescript": "^2.9.2"
+  }
+}
