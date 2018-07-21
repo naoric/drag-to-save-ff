@@ -7,9 +7,9 @@ only by right click, which I find very uncomfortable.
 This extension will save dragged links to an offline 'Read Later' list. 
 There's much more to be done here, like:
 
+- [x] Better indication when a new link is added to the list
 - [ ] Integration with Pocket and other services
 - [ ] Configuring matching URL patterns
-- [ ] Better indication when a new link is added to the list
 - [ ] Prevent duplicate links
 - [ ] Better UI
 

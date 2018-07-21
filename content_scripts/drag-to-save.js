@@ -1,38 +1,28 @@
 (function() {
-  const $check = $('<i class="fas fa-check lc-added lc-hidden"/>');
+  const $notification = $('<div class="lc-notification"/>');
 
-  $(document.body).append($check);
+  $(document.body).append($notification);
+  $notification.css('display', 'none');
 
-  document.addEventListener("dragend", ev => {
+  document.addEventListener('dragend', ev => {
     const { target } = ev;
-    if (target.tagName === "A" && target.href) {
+    if (target.tagName === 'A' && target.href) {
       ev.preventDefault();
+      const link = {
+        link: target.href.toString(),
+        title: target.textContent.toString()
+      };
       browser.runtime.sendMessage({
-        type: "add-link",
-        link: {
-          link: target.href.toString(),
-          title: target.textContent.toString()
-        }
+        type: 'add-link',
+        link
       });
-      animateAdd(ev);
+      animateNotification(link);
     }
   });
 
-  function animateAdd(e) {
-    const x = e.screenX;
-    const y = e.screenY;
-
-    $check.css({
-      left: x,
-      top: y - 100
-    });
-
-    $check.animate(
-      {
-        top: "-=50",
-        opacity: 1
-      },
-      () => $check.removeAttr("style")
-    );
+  function animateNotification(link) {
+    $notification.text(`Added ${link.title}`);
+    $notification.fadeIn('fast');
+    timeoutSig = setTimeout(() => $notification.fadeOut('fast'), 2000);
   }
 })();
