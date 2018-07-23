@@ -85,7 +85,8 @@ body {
   border-bottom: 1px solid #ededed;
 }
 
-.lc-list .lc-item .lc-link:link {
+.lc-list .lc-item .lc-link:link,
+.lc-list .lc-item .lc-link:visited {
   display: flex;
   text-decoration: none;
   color: black;
