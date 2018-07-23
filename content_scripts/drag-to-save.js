@@ -17,6 +17,13 @@
         link
       });
       animateNotification(link);
+    } else {
+      browser.runtime.sendMessage({
+        type: 'open-link',
+        url: `https://duckduckgo.com/?q=${ev.dataTransfer.getData(
+          'Text'
+        )}&t=ffab&ia=answer`
+      });
     }
   });
 

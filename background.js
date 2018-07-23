@@ -3,7 +3,8 @@ browser.runtime.onMessage.addListener(notify);
 const MsgTypes = {
   addLink: 'add-link',
   clearLinks: 'clear-links',
-  removeLink: 'remove-link'
+  removeLink: 'remove-link',
+  openLink: 'open-link'
 };
 
 function notify(msg) {
@@ -17,8 +18,14 @@ function notify(msg) {
     case MsgTypes.removeLink:
       removeLink(msg.index);
       break;
+    case MsgTypes.openLink:
+      openLink(msg.url);
     case MsgTypes.getLinks:
   }
+}
+
+function openLink(url) {
+  browser.tabs.create({ url });
 }
 
 function addLink(link) {
