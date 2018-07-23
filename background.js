@@ -24,6 +24,9 @@ function notify(msg) {
 function addLink(link) {
   browser.storage.sync.get({ links: [] }).then(results => {
     if (results.links) {
+      if (results.links.find(ln => ln.link === link.link)) {
+        return;
+      }
       results.links.push(link);
     } else {
       results.links = [link];

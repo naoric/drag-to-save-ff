@@ -17,15 +17,46 @@ body {
   cursor: pointer;
 }
 
+.header {
+  background-color: #e4e4e4;
+  padding: 5px 10px;
+  position: relative;
+  font-family: -apple-system, sans-serif;
+  font-size: 22px;
+}
+
+.lc-add-current {
+  background-color: #7438d4;
+  color: #ffffff;
+  font-size: 20px;
+  text-decoration: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  float: right;
+}
+
+.lc-add-current:active {
+  background-color: #6520d4;
+}
+
+.lc-add-current .plus-sign {
+  text-align: center;
+}
+
 .lc-container {
   width: 400px;
   height: 400px;
   right: 0;
-  z-index: 9999;
   font-family: -apple-system, sans-serif;
   font-size: 14px;
   color: black;
   display: flex;
+  position: relative;
   background-color: white;
   flex-direction: column;
   justify-content: space-between;
@@ -94,7 +125,7 @@ body {
 }
 
 .lc-clipboard {
-  background-color: #0078f5;
+  background-color: #19a2d8;
 }
 
 .lc-clipboard-input {
@@ -103,13 +134,13 @@ body {
 }
 
 .lc-clipboard:active {
-  background-color: #005fc3;
+  background-color: #0096d1;
 }
 
 .lc-clear {
-  background-color: #ff1212;
+  background-color: #e45300;
 }
 
 .lc-clear:active {
-  background-color: #9f0b0b;
+  background-color: #be4600;
 }

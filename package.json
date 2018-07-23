@@ -5,7 +5,7 @@
   "main": "background.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc popup/dts-popup.tsx"
+    "build": "parcel build -d popup --no-minify popup/dts-popup.tsx"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +14,6 @@
     "lit-html": "^0.10.2"
   },
   "devDependencies": {
-    "typescript": "^2.9.2"
+    "typescript": "^3.0.0-rc"
   }
 }

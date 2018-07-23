@@ -64,7 +64,24 @@ browser.storage.onChanged.addListener(
 );
 
 const container = getContainer()!;
+const addCurrent = s('.lc-add-current')!;
 document.body.appendChild(container);
+
+addCurrent.addEventListener('click', e => {
+  browser.tabs
+    .query({ active: true })
+    .then(([tab]: any) => {
+      const { url: link, title } = tab;
+      const linkToSave = { link, title };
+      browser.runtime.sendMessage({
+        type: 'add-link',
+        link: linkToSave
+      });
+    })
+    .catch(console.log);
+
+  e.preventDefault();
+});
 
 function getContainer() {
   return s('.lc-container');
