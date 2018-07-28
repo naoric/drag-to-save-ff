@@ -28,24 +28,23 @@ body {
 .lc-add-current {
   background-color: #7438d4;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 21px;
   text-decoration: none;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   z-index: 999;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
   float: right;
-}
-
-.lc-add-current:active {
-  background-color: #6520d4;
 }
 
 .lc-add-current .plus-sign {
   text-align: center;
+  display: block;
+  width: 100%;
+}
+
+.lc-add-current:active {
+  background-color: #6520d4;
 }
 
 .lc-container {
