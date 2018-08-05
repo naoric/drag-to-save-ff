@@ -1,11 +1,13 @@
 {
   "name": "@astralink/drag-to-save",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "background.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build -d popup --no-minify popup/dts-popup.tsx"
+    "build": "parcel build -d popup --no-minify popup/dts-popup.tsx",
+    "pack": "web-ext build --overwrite-dest --ignore-files=node_modules/* web-ext-artifacts/* .git/* popup/*.tsx popup/*.map Icons/*.sketch",
+    "prepack": "npm run build"
   },
   "keywords": [],
   "author": "",
