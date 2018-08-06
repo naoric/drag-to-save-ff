@@ -4,35 +4,41 @@
   document.body.appendChild(dropZoneFragment);
 
   const DROP_ZONE_SELECTOR = '.dds-drop-area';
+  const ACTIVE_DROP_DISTANCE_THRESHOLD = 190;
+
   const dropZone = document.querySelector(DROP_ZONE_SELECTOR);
   const dropHerePlaceholder = dropZone.querySelector('.dds-drop-here');
   const dropEmpty = dropZone.querySelector('.dds-drop-empty');
   const dropped = dropZone.querySelector('.dds-dropped');
+
   let timeout = 0;
   let dropHandled = false;
+  let dropZoneMiddlePoint = 0;
 
   function preventDefault(e) {
     e.preventDefault();
-    e.stopPropagation();
   }
 
-  document.addEventListener(
-    'dragstart',
-    e => {
-      if (isDraggableLink(e.target)) {
-        e.dataTransfer.setData(
-          'text/plain',
-          JSON.stringify(serializeLink(e.target))
-        );
-        dragNotDropZone();
-      }
-    },
-    { capture: true }
-  );
+  document.addEventListener('dragstart', e => {
+    if (isDraggableLink(e.target)) {
+      dropZoneMiddlePoint = dropBoxMiddlePoint();
+      e.dataTransfer.setData(
+        'text/plain',
+        JSON.stringify(serializeLink(e.target))
+      );
+      dropZoneGlimpse();
+    }
+  });
 
   document.addEventListener('dragend', e => {
-    preventDefault(e);
-    if (!dropHandled) {
+    if (!dropHandled && isDraggableLink(e.target)) {
+      preventDefault(e);
+      // if (isDraggableLink(e.target)) {
+      //   browser.runtime.sendMessage({
+      //     type: 'open-link',
+      //     url: extractDataFromEvent(e).link
+      //   });
+      // }
       reset();
     }
   });
@@ -42,6 +48,7 @@
       preventDefault(e);
       dragDropZone();
     }
+    dragMovementHandler(e);
   });
 
   document.addEventListener('dragleave', e => {
@@ -58,8 +65,37 @@
     }
   });
 
+  function dragMovementHandler(e) {
+    if (isNearDropZone(e)) {
+      dragNotDropZone();
+    } else {
+      dropZoneGlimpse();
+    }
+  }
+
+  function dropZoneGlimpse() {
+    dropZone.classList.remove('dds-drop-area-visible');
+    dropZone.classList.add('dds-drop-area-glimpse');
+  }
+
+  function hideDropZone() {
+    dropZone.classList.remove('dds-drop-area-visible', 'dds-drop-area-glimpse');
+    dropZone.addEventListener('transitionend', resetNotificationMarker);
+  }
+
+  function isNearDropZone(e) {
+    const { x, y } = dropZoneMiddlePoint;
+    const distance = Math.hypot(x - e.clientX, y - e.clientY);
+    return distance < ACTIVE_DROP_DISTANCE_THRESHOLD;
+  }
+
+  function dropBoxMiddlePoint() {
+    const { clientWidth } = document.documentElement;
+    return { x: clientWidth / 2, y: 0 };
+  }
+
   function handleDrop(e) {
-    const link = JSON.parse(e.dataTransfer.getData('text/plain'));
+    const link = extractDataFromEvent(e);
     browser.runtime.sendMessage({
       type: 'add-link',
       link
@@ -69,6 +105,9 @@
     dropHandled = true;
   }
 
+  function extractDataFromEvent(e) {
+    return JSON.parse(e.dataTransfer.getData('text/plain'));
+  }
   function isDraggableLink(el) {
     return el.matches('a');
   }
@@ -83,8 +122,7 @@
   }
 
   function reset() {
-    dropZone.classList.remove('dds-drop-area-visible');
-    dropZone.addEventListener('transitionend', resetNotificationMarker);
+    hideDropZone();
     dropHandled = false;
     clearTimeout(timeout);
     timeout = 0;
